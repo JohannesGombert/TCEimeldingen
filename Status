@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Statusseite</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>Statusseite</h1>
+	<p>Der aktuelle Status ist: <span id="status">?</span></p>
+	<form>
+		<input type="radio" name="status" value="green">Grün<br>
+		<input type="radio" name="status" value="red">Rot<br>
+		<input type="submit" value="Status aktualisieren">
+	</form>
+	<script>
+		var statusElement = document.getElementById("status");
+		var radios = document.getElementsByName("status");
+		var status = localStorage.getItem("status");
+		if (status === "green") {
+			statusElement.innerText = "Grün";
+			statusElement.style.color = "green";
+		} else if (status === "red") {
+			statusElement.innerText = "Rot";
+			statusElement.style.color = "red";
+		}
+		for (var i = 0; i < radios.length; i++) {
+			radios[i].addEventListener("click", function() {
+				var newStatus = this.value;
+				localStorage.setItem("status", newStatus);
+				if (newStatus === "green") {
+					statusElement.innerText = "Grün";
+					statusElement.style.color = "green";
+				} else if (newStatus === "red") {
+					statusElement.innerText = "Rot";
+					statusElement.style.color = "red";
+				}
+			});
+		}
+	</script>
+</body>
+</html>
